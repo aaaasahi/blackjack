@@ -2,16 +2,16 @@ require "./deck.rb"
 require "./card.rb"
 require "./user.rb"
 require "./dealer.rb"
+require "./message.rb"
 
 #ゲーム進行
 class Blackjack
 
+  include Message
+
   def game_start
-    puts <<~TEXT
-    =======================
-    Welcome to Blackjack!!!
-    =======================
-    TEXT
+  
+    start_msg
 
     deck = Deck.new
     user = User.new
@@ -25,10 +25,7 @@ class Blackjack
       #Hitならもう一枚引く、スタンドならループ抜ける
       while true
 
-        puts <<~TEXT
-        どうしますか？
-        1.Hit(カードを引く)　 2.Stand(今の手札で勝負)
-        TEXT
+        select_msg
 
         #行動選択
         select_num = gets.to_i
@@ -37,13 +34,13 @@ class Blackjack
           user.show_hand
           
           if user.cal_score_user >= 22
-              burst
-              return 
+            burst_msg
+            return 
           end
         elsif select_num == 2
-            break
+          break
         else
-            puts "　1 or 2 を入力してください。　"
+          error_msg
         end
 
       end
@@ -68,20 +65,15 @@ class Blackjack
     user_score = user.cal_score_user
     dealer_score = dealer.cal_score_dealer
     if  user_score == dealer_score
-        puts "同点なので引き分けです。"
+      draw_msg
     elsif user_score == 21
-        puts "ブラックジャック！！ あなたの勝ちです！"
+      blackjack_msg
     elsif dealer_score >= 22
-        puts "ディーラーがバーストしました。あなたの勝ちです！"
+      dealer_burst_msg
     elsif dealer_score > user_score
-        puts "ディーラーの勝ちです！"
+      user_lose_msg
     else
-        puts "あなたの勝ちです！"
+      user_win_msg
     end
-  end
-
-  def burst
-    puts "バースト！！"
-    puts "合計点数が21を超えたのであなたの負けです。"
   end
 end
