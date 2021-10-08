@@ -1,6 +1,9 @@
 # ブラックジャック
 Rubyの基礎文法を勉強後、知識定着のために初めて作成したRubyで動くブラックジャックゲームです。
 
+![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/69437267/136484496-2a652085-bef9-4f89-b953-7784bc540baf.gif)
+
+
 # アプリ概要
 ブラックジャックの以下の基本ルールを実装
 
