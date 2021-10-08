@@ -49,7 +49,6 @@ class Blackjack
     user.user_first_draw_card(deck) 
     dealer.dealer_first_draw(deck)
 
-      #Hitならもう一枚引く、スタンドならループ抜ける
       while true
 
         select_msg
